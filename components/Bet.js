@@ -94,8 +94,8 @@ function Bet(props) {
         <div>
             <div className="z-10 absolute w-full mt-20">
                 <div>
-                    <div className="text-center">
-                        <span className={"bg-red-500 px-8 py-3 rounded-xl z-1 " + (isVisible ? "visble" : "invisible")}>Your wallet is connected to the wrong network.Please switch to main network</span>
+                    <div className="bg-red-500 rounded-xl w-8/12 sm:w-7/12 md:w-6/12 lg:w-5/12 mx-auto text-center py-1">
+                        <span className={"z-1 text-xs sm:text-sm md:text-md lg:text-lg text-ellipsis " + (isVisible ? "visble" : "invisible")}>Your wallet is connected to the wrong network.Please switch to main network</span>
                     </div>
                     
                     <div className="z-50 mt-20 bg-black w-5/12 lg:w-3/12 mx-auto h-4/6 text-white text-center text-md sm:text-xl md:text-2xl lg:text-3xl opacity-30 rounded-xl py-5">

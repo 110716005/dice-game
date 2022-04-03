@@ -12,6 +12,7 @@ function App() {
     const [defaultAccount, setDefaultAccount] = useState()
     const [userBalance, setUserBalance] = useState()
     const [connButtonText, setConnButtonText] = useState("Connect Wallet")
+    const [hasMetamask, setHasMetamask] = useState(1)
 
     const connectWalletHandler = () => {
         if (window.ethereum) {
@@ -19,9 +20,7 @@ function App() {
                 accountChangedHandler(result[0])
             })
         } else {
-            return (
-                <div>Please install Metamask</div>
-            )
+            
         }
     }
 
@@ -38,10 +37,26 @@ function App() {
     }
 
     useEffect(() => {
-        window.ethereum.on('accountsChanged', accountChangedHandler)
+        if(window.ethereum){
+            window.ethereum.on('accountsChanged', accountChangedHandler)
+        }
     }, [])
 
-    if (!ethers.utils.isAddress(connButtonText)) {
+    useEffect(() => {
+        if(window.ethereum){
+            setHasMetamask(1)
+        }else{
+            setHasMetamask(0)
+        }
+    })
+    if(!hasMetamask){
+        return (
+            <div >
+                <p className="mt-20 text-center border-2 border-rose-600 w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12 mx-auto">Please install Metamask</p>
+            </div>
+        )
+    }
+    if (!ethers.utils.isAddress(connButtonText) && hasMetamask) {
         return <Header login={connectWalletHandler} address={connButtonText} userBalance={userBalance}/>
     } else {
         return (
